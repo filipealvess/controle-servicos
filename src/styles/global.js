@@ -7,7 +7,7 @@ const GlobalStyle = createGlobalStyle`
     border: none;
     outline: none;
     background-color: transparent;
-    font-size: 1.8rem;
+    font-size: ${({ theme }) => theme.fontText};
     font-family: 'Montserrat', sans-serif;
     text-decoration: none;
     list-style: none;
