@@ -7,6 +7,10 @@ const Container = styled.section`
   width: 100%;
   max-width: 500px;
   margin: 3rem auto;
+
+  @media (max-width: 400px) {
+    flex-direction: column;
+  }
 `;
 
 export const Tab = styled.button`
@@ -25,6 +29,13 @@ export const Tab = styled.button`
     color: #181818;
     cursor: default;
   `}
+
+  @media (max-width: 400px) {
+    width: 100%;
+    border-radius: 8px !important;
+
+    & ~ & { margin-top: 1rem; }
+  }
 `;
 
 export default Container;
