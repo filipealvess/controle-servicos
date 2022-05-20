@@ -1,7 +1,8 @@
 import React from 'react';
+import AppRoutes from './routes';
 
 export default function App() {
   return (
-    <h1>Controle de Serviços</h1>
+    <AppRoutes />
   );
 }
