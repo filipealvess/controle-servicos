@@ -1,17 +1,6 @@
 import styled from 'styled-components';
 
-const Container = styled.label`
-  display: flex;
-  flex-direction: column;
-
-  & ~ & { margin-top: 2rem; }
-`;
-
-export const Label = styled.span`
-  margin-bottom: 0.5rem;
-`;
-
-export const InputWrapper = styled.div`
+const Container = styled.div`
   display: flex;
   padding: 10px 20px;
   border: 1px solid ${({ theme }) => theme.mediumGrey};
