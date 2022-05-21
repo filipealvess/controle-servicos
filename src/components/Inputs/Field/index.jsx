@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Eye, EyeOff } from 'react-feather';
 import IconButton from '../../Buttons/IconButton';
-import Container, { Input, InputWrapper, Label } from './styles';
+import Label from '../Label';
+import Container, { Input } from './styles';
 
 export default function Field({ label, placeholder, type = 'text' }) {
   const [icon, setIcon] = useState(<Eye size={18} />);
@@ -20,10 +21,8 @@ export default function Field({ label, placeholder, type = 'text' }) {
   }
 
   return (
-    <Container>
-      <Label>{label}:</Label>
-
-      <InputWrapper>
+    <Label text={label}>
+      <Container>
         <Input type={inputType} placeholder={placeholder} />
 
         {
@@ -32,7 +31,7 @@ export default function Field({ label, placeholder, type = 'text' }) {
             {icon}
           </IconButton>
         }
-      </InputWrapper>
-    </Container>
+      </Container>
+    </Label>
   );
 }

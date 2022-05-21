@@ -1,10 +1,10 @@
 import React from 'react';
 import Container from './styles';
 
-export default function NewButton({ onClick = () => {} }) {
+export default function SecondaryButton({ text, onClick = () => {} }) {
   return (
     <Container type="button" onClick={onClick}>
-      + Novo
+      {text}
     </Container>
   );
 }

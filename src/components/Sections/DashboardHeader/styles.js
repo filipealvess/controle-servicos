@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import NewButton from '../../Buttons/NewButton/styles';
+import SecondaryButton from '../../Buttons/SecondaryButton/styles';
 import SearchBar from '../../Inputs/SearchBar/styles';
 
 const Container = styled.header`
@@ -9,6 +10,11 @@ const Container = styled.header`
   margin-bottom: 4rem;
 
   & > ${NewButton} { width: 15%; }
+
+  & > ${SecondaryButton} {
+    width: auto;
+    font-size: 1.4rem;
+  }
 
   @media (max-width: 1000px) {
     flex-wrap: wrap;

@@ -6,7 +6,7 @@ import EmptySection from '../../components/Sections/EmptySection';
 export default function ProvidersPage() {
   return (
     <DashboardTemplate currentPage="providers">
-      <DashboardHeader title="Prestadores de Serviço" />
+      <DashboardHeader title="Prestadores de Serviço" route="/prestadores/novo" />
 
       <EmptySection
         title="Nenhum prestador cadastrado"
