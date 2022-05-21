@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import NewButton from '../NewButton/styles';
-import SearchBar from '../SearchBar/styles';
+import NewButton from '../../Buttons/NewButton/styles';
+import SearchBar from '../../Inputs/SearchBar/styles';
 
 const Container = styled.header`
   display: flex;

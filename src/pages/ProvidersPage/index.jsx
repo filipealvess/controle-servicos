@@ -1,7 +1,7 @@
 import React from 'react';
-import DashboardHeader from '../../components/DashboardHeader';
-import DashboardTemplate from '../../components/DashboardTemplate';
-import EmptySection from '../../components/EmptySection';
+import DashboardHeader from '../../components/Sections/DashboardHeader';
+import DashboardTemplate from '../../components/Templates/DashboardTemplate';
+import EmptySection from '../../components/Sections/EmptySection';
 
 export default function ProvidersPage() {
   return (

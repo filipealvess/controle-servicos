@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import tabs from '../../static/tabs';
+import tabs from '../../../static/tabs';
 import Container, { Tab } from './styles';
 
 export default function Tabs({ currentPage = 'login' }) {

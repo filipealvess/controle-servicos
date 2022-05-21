@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Expanded from '../Expanded/styles';
+import Expanded from '../../Sections/Expanded/styles';
 
 const Container = styled.div`
   display: flex;

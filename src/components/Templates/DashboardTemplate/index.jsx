@@ -1,8 +1,8 @@
 import React from 'react';
 import { LogOut } from 'react-feather';
-import dashboardLinks from '../../static/dashboardLinks';
-import Expanded from '../Expanded';
-import PageLink from '../PageLink';
+import dashboardLinks from '../../../static/dashboardLinks';
+import Expanded from '../../Sections/Expanded';
+import PageLink from '../../Links/PageLink';
 import Container, { Divider, Image, Links, Logo, Main, Menu, Title } from './styles';
 
 export default function DashboardTemplate({ children, currentPage }) {

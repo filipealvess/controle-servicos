@@ -1,8 +1,8 @@
 import React from 'react';
-import Field from '../../components/Field';
-import PrimaryButton from '../../components/PrimaryButton';
-import SizedBox from '../../components/SizedBox';
-import AuthPageTemplate from '../../components/AuthPageTemplate';
+import Field from '../../components/Inputs/Field';
+import PrimaryButton from '../../components/Buttons/PrimaryButton';
+import SizedBox from '../../components/Sections/SizedBox';
+import AuthPageTemplate from '../../components/Templates/AuthPageTemplate';
 
 export default function LoginPage() {
   return (
