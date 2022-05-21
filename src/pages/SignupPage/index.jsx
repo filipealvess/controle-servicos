@@ -4,13 +4,14 @@ import PrimaryButton from '../../components/PrimaryButton';
 import SizedBox from '../../components/SizedBox';
 import AuthPageTemplate from '../../components/AuthPageTemplate';
 
-export default function LoginPage() {
+export default function SignupPage() {
   return (
-    <AuthPageTemplate>
+    <AuthPageTemplate currentPage="signup">
+      <Field label="Nome" placeholder="Seu nome" />
       <Field label="E-mail" placeholder="Seu e-mail" type="email" />
       <Field label="Senha" placeholder="******" type="password" />
       <SizedBox height={40} />
-      <PrimaryButton text="Entrar" />
+      <PrimaryButton text="Criar Conta" />
     </AuthPageTemplate>
   );
 }
