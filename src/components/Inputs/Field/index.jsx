@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Eye, EyeOff } from 'react-feather';
-import IconButton from '../IconButton';
+import IconButton from '../../Buttons/IconButton';
 import Container, { Input, InputWrapper, Label } from './styles';
 
 export default function Field({ label, placeholder, type = 'text' }) {
