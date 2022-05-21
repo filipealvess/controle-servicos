@@ -8,6 +8,13 @@ const Container = styled.button`
   color: ${({ theme }) => theme.primary};
   font-weight: 600;
   text-transform: uppercase;
+  transition-duration: 0.3s;
+  transition-property: border-color, color;
+
+  &:hover {
+    border-color: #272A45;
+    color: #272A45;
+  }
 `;
 
 export default Container;

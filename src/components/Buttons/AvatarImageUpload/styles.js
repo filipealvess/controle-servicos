@@ -17,6 +17,11 @@ export const Content = styled.div`
   width: 100%;
   height: 100%;
   background-color: ${({ theme }) => theme.primary};
+  transition: 0.3s background-color;
+
+  &:hover {
+    background-color: #272A45;
+  }
 `;
 
 export default Container;
