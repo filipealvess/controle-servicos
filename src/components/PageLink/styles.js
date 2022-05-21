@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { css } from 'styled-components';
 
@@ -21,7 +22,7 @@ const Container = styled.li`
   }
 `;
 
-export const Content = styled.a`
+export const Content = styled(Link)`
   display: flex;
   align-items: center;
   padding: 10px;
