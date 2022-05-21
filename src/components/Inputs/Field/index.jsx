@@ -8,6 +8,7 @@ export default function Field({ label, placeholder, type = 'text', tip }) {
   const [icon, setIcon] = useState(<Eye size={18} />);
   const [passwordIsVisible, setPasswordIsVisible] = useState(false);
   const [inputType, setIinputType] = useState(type);
+  const [isActive, setIsActive] = useState(false);
 
   useEffect(() => {
     if (type === 'password') {
@@ -22,8 +23,13 @@ export default function Field({ label, placeholder, type = 'text', tip }) {
 
   return (
     <Label text={label} tip={tip}>
-      <Container>
-        <Input type={inputType} placeholder={placeholder} />
+      <Container isActive={isActive}>
+        <Input
+          type={inputType}
+          placeholder={placeholder}
+          onFocus={() => setIsActive(true)}
+          onBlur={() => setIsActive(false)}
+        />
 
         {
           type === 'password' &&

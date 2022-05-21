@@ -8,6 +8,11 @@ const Container = styled.button`
   color: #FFFFFF;
   font-weight: 600;
   text-transform: uppercase;
+  transition: 0.3s background-color;
+
+  &:hover {
+    background-color: #272A45;
+  }
 `;
 
 export default Container;

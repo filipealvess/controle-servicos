@@ -5,11 +5,16 @@ import { css } from 'styled-components';
 const Container = styled.li`
   border-radius: 8px;
   background-color: transparent;
+  transition: 0.3s background-color;
 
   & ~ & { margin-top: 10px; }
 
+  &:hover { background-color: #494C67; }
+
   ${({ isActive }) => isActive && css`
-    background-color: rgba(255, 255, 255, 5%);
+    background-color: #50536E;
+
+    &:hover { background-color: #50536E; }
 
     & ${Text} { font-weight: 600; }
   `};

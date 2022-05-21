@@ -1,5 +1,4 @@
-import styled from 'styled-components';
-import { css } from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const Container = styled.section`
   display: flex;
@@ -19,6 +18,9 @@ export const Tab = styled.button`
   background-color: ${({ theme }) => theme.lightGrey};
   color: rgba(0, 0, 0, 0.6);
   font-weight: 600;
+  transition: 0.3s color;
+
+  &:hover { color: rgba(0, 0, 0, 0.8); }
 
   &:first-child { border-radius: 8px 0 0 8px; }
 
