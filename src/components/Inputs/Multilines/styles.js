@@ -6,6 +6,9 @@ const Input = styled.textarea`
   border: 1px solid ${({ theme }) => theme.mediumGrey};
   border-radius: 8px;
   resize: vertical;
+  transition: 0.3s border-color;
+
+  &:focus { border-color: #000000; }
 `;
 
 export default Input;
