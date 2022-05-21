@@ -28,6 +28,10 @@ export const Menu = styled.aside`
 export const Main = styled.main`
   flex-grow: 1;
   padding: 3rem 4rem;
+
+  @media (max-width: 500px) {
+    padding: 2rem;
+  }
 `;
 
 export const Logo = styled.article`
