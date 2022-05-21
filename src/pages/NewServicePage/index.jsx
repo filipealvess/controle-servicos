@@ -8,7 +8,7 @@ import Multilines from '../../components/Inputs/Multilines';
 
 export default function NewServicePage() {
   return (
-    <DashboardTemplate currentPage="providers">
+    <DashboardTemplate currentPage="services">
       <DashboardHeader
         title="Novo Serviço"
         route="/servicos"

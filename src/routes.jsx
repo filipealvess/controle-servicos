@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import ImportPage from './pages/ImportPage';
 import LoginPage from './pages/LoginPage';
 import NewProviderPage from './pages/NewProviderPage';
 import NewServicePage from './pages/NewServicePage';
@@ -17,6 +18,7 @@ export default function AppRoutes() {
         <Route path="/prestadores/novo" element={<NewProviderPage />} />
         <Route path="/servicos" element={<ServicesPage />} />
         <Route path="/servicos/novo" element={<NewServicePage />} />
+        <Route path="/importar" element={<ImportPage />} />
       </Routes>
     </BrowserRouter>
   );
