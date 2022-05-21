@@ -3,7 +3,7 @@ import Container from './styles';
 
 export default function PrimaryButton({ text }) {
   return (
-    <Container>
+    <Container type="button">
       {text}
     </Container>
   );

@@ -1,8 +1,7 @@
 import styled from 'styled-components';
 
 const Container = styled.div`
-  width: ${({ width }) => `${width}px`};
-  height: ${({ height }) => `${height}px`};
+  flex-grow: 1;
 `;
 
 export default Container;
