@@ -28,6 +28,7 @@ export const Menu = styled.aside`
 export const Main = styled.main`
   flex-grow: 1;
   padding: 3rem 4rem;
+  overflow-y: auto;
 
   @media (max-width: 500px) {
     padding: 2rem;
