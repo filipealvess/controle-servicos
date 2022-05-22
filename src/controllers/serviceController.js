@@ -1,3 +1,6 @@
+import axios from 'axios';
+import { CREATE_SERVICE_ROUTE } from '../api/routes';
+
 export function formatPrice(originalPrice) {
   const cleanPrice = originalPrice.replace(/\D/g, '');
   const price = Number(cleanPrice);
@@ -34,4 +37,14 @@ export function formatPrice(originalPrice) {
   }
 
   return `R$ ${formatedPrice}`;
+}
+
+export async function createService(userID, name, description, defaultPrice) {
+  try {
+    const { status, data } = await axios.post(CREATE_SERVICE_ROUTE, { userID, name, description, defaultPrice });
+
+    return status === 201 ? data.data : null;
+  } catch (error) {
+    return null;
+  }
 }
