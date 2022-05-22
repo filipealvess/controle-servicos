@@ -1,12 +1,18 @@
 import React, { createContext, useContext, useState } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
-import { getLocalUser, setLocalUser } from '../../controllers/userController';
+import { deleteLocalUser, getLocalUser, setLocalUser } from '../../controllers/userController';
 
 const AuthContext = createContext({});
 
 export default function AuthProvider({ children }) {
   const [user, setUser] = useState(getLocalUser);
   const [isAuth, setIsAuth] = useState(() => Boolean(getLocalUser()));
+
+  function logout() {
+    setUser(null);
+    deleteLocalUser();
+    setIsAuth(false);
+  }
 
   function saveUser(newUser) {
     setUser(newUser);
@@ -15,7 +21,7 @@ export default function AuthProvider({ children }) {
   }
 
   return (
-    <AuthContext.Provider value={{ user, setUser: saveUser, isAuth }}>
+    <AuthContext.Provider value={{ user, setUser: saveUser, isAuth, logout }}>
       {children}
     </AuthContext.Provider>
   );

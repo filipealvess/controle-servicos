@@ -4,8 +4,11 @@ import dashboardLinks from '../../../static/dashboardLinks';
 import Expanded from '../../Sections/Expanded';
 import PageLink from '../../Links/PageLink';
 import Container, { Divider, Image, Links, Logo, Main, Menu, Title } from './styles';
+import { useAuth } from '../../../context/AuthContext';
 
 export default function DashboardTemplate({ children, currentPage }) {
+  const { logout } = useAuth();
+
   return (
     <Container>
       <Menu>
@@ -35,7 +38,12 @@ export default function DashboardTemplate({ children, currentPage }) {
 
           <Expanded />
 
-          <PageLink icon={<LogOut size={18} />} title="Sair" route="/" />
+          <PageLink
+            icon={<LogOut size={18} />}
+            title="Sair"
+            route="/"
+            onClick={logout}
+          />
         </Links>
       </Menu>
 
