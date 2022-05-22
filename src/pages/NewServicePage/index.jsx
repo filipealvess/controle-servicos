@@ -31,7 +31,7 @@ export default function NewServicePage() {
   async function handleFormSubmit(event) {
     event.preventDefault();
     const cleanPrice = Number(price.replace(/\D/g, ''));
-    const data = await createService(user.id, description, name, cleanPrice);
+    const data = await createService(user.id, name, description, cleanPrice);
 
     if (data) {
       sessionStorage.setItem('one-service-was-created', true);
