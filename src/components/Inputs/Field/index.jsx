@@ -9,7 +9,9 @@ export default function Field({
   placeholder,
   type = 'text',
   tip,
-  required = false
+  required = false,
+  value = '',
+  onChange = () => {}
 }) {
   const [icon, setIcon] = useState(<Eye size={18} />);
   const [passwordIsVisible, setPasswordIsVisible] = useState(false);
@@ -28,7 +30,9 @@ export default function Field({
       <Container isActive={isActive}>
         <Input
           type={inputType}
+          value={value}
           placeholder={placeholder}
+          onChange={onChange}
           onFocus={() => setIsActive(true)}
           onBlur={() => setIsActive(false)}
           required={required}
