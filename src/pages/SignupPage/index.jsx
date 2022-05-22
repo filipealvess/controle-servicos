@@ -3,27 +3,37 @@ import Field from '../../components/Inputs/Field';
 import PrimaryButton from '../../components/Buttons/PrimaryButton';
 import SizedBox from '../../components/Sections/SizedBox';
 import AuthPageTemplate from '../../components/Templates/AuthPageTemplate';
+import { createUser } from '../../controllers/userController';
+import AlertPopup from '../../components/Popups/AlertPopup';
 
 export default function SignupPage() {
+  const [popupIsVisible, setPopupIsVisible] = useState(false);
   const [buttonIsVisible, setButtonIsVisible] = useState(false);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   useEffect(() => {
-    const nameIsEmpty = name.length === 0;
-    const emailIsEmpty = email.length === 0;
-    const passwordIsEmpty = password.length === 0;
+    const nameIsNotEmpty = name.length > 0;
+    const emailIsNotEmpty = email.length > 0;
+    const passwordIsNotEmpty = password.length > 0;
 
-    if (nameIsEmpty || emailIsEmpty || passwordIsEmpty) {
-      setButtonIsVisible(false);
-    } else {
-      setButtonIsVisible(true);
-    }
+    setButtonIsVisible(nameIsNotEmpty && emailIsNotEmpty && passwordIsNotEmpty);
   }, [email, name, password]);
 
+  async function handleFormSubmit(event) {
+    event.preventDefault();
+    const data = await createUser(name, email, password);
+
+    if (data) {
+      console.log(data);
+    } else {
+      setPopupIsVisible(true);
+    }
+  }
+
   return (
-    <AuthPageTemplate currentPage="signup">
+    <AuthPageTemplate currentPage="signup" onSubmit={handleFormSubmit}>
       <Field
         label="Nome"
         placeholder="Seu nome"
@@ -53,6 +63,13 @@ export default function SignupPage() {
       <SizedBox height={40} />
 
       <PrimaryButton text="Criar Conta" disabled={!buttonIsVisible} />
+
+      <AlertPopup
+        title="Erro no cadastro"
+        description="Já existe um usuário com o endereço de e-mail informado"
+        isVisible={popupIsVisible}
+        onClose={() => setPopupIsVisible(false)}
+      />
     </AuthPageTemplate>
   );
 }
