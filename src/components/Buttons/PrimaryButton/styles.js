@@ -13,6 +13,11 @@ const Container = styled.button`
   &:hover {
     background-color: #272A45;
   }
+  
+  &:disabled {
+    background-color: #727379;
+    cursor: not-allowed;
+  }
 `;
 
 export default Container;
