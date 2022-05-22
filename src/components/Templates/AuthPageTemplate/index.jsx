@@ -1,7 +1,8 @@
 import React from 'react';
+import Form from '../../Sections/Form';
 import Header from '../../Sections/Header';
 import Tabs from '../../Sections/Tabs';
-import Container, { Form } from './styles';
+import Container from './styles';
 
 export default function AuthPageTemplate({ children, currentPage = 'login' }) {
   return (

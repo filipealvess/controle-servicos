@@ -1,6 +1,7 @@
 import React from 'react';
 import DashboardHeader from '../../components/Sections/DashboardHeader';
 import DashboardTemplate from '../../components/Templates/DashboardTemplate';
+import Form from '../../components/Sections/Form';
 import Field from '../../components/Inputs/Field';
 import PrimaryButton from '../../components/Buttons/PrimaryButton';
 import SizedBox from '../../components/Sections/SizedBox';
@@ -15,7 +16,7 @@ export default function NewServicePage() {
         hasCancelButton
       />
 
-      <SizedBox maxWidth={500} auto>
+      <Form>
         <Field label="Nome" placeholder="Nome do serviço" required />
         <Multilines label="Descrição" placeholder="Descrição do serviço" required />
         <Field
@@ -27,7 +28,7 @@ export default function NewServicePage() {
         />
         <SizedBox height={40} />
         <PrimaryButton text="Salvar" />
-      </SizedBox>
+      </Form>
     </DashboardTemplate>
   );
 }

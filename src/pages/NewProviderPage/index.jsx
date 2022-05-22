@@ -2,6 +2,7 @@ import React from 'react';
 import DashboardHeader from '../../components/Sections/DashboardHeader';
 import DashboardTemplate from '../../components/Templates/DashboardTemplate';
 import AvatarImageUpload from '../../components/Buttons/AvatarImageUpload';
+import Form from '../../components/Sections/Form';
 import Field from '../../components/Inputs/Field';
 import PrimaryButton from '../../components/Buttons/PrimaryButton';
 import ServicesList from '../../components/Sections/ServicesList';
@@ -16,7 +17,7 @@ export default function NewProviderPage() {
         hasCancelButton
       />
 
-      <SizedBox maxWidth={500} auto>
+      <Form>
         <AvatarImageUpload />
         <Field label="Nome" placeholder="Nome do prestador" required />
         <Field label="Telefone" placeholder="(00) 0000-0000" type="tel" required />
@@ -24,7 +25,7 @@ export default function NewProviderPage() {
         <ServicesList />
         <SizedBox height={40} />
         <PrimaryButton text="Salvar" />
-      </SizedBox>
+      </Form>
     </DashboardTemplate>
   );
 }
