@@ -1,11 +1,11 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const Container = styled.article`
   display: flex;
   flex-direction: column;
   position: fixed;
   top: 40px;
-  right: -2px;
+  right: -100%;
   width: 90%;
   max-width: 450px;
   padding: 15px 20px;
@@ -14,11 +14,14 @@ const Container = styled.article`
   color: #FFFFFF;
   box-shadow: 0 2px 5px 2px rgba(0, 0, 0, 0.3);
   cursor: pointer;
-  transition: 0.3s background-color;
+  transition-duration: 0.3s;
+  transition-property: right, background-color;
 
-  &:hover {
-    background-color: #272A45;
-  }
+  &:hover { background-color: #272A45; }
+
+  ${({ isVisible }) => isVisible && css`
+    right: -2px;
+  `}
 `;
 
 export const Header = styled.header`
