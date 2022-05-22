@@ -4,13 +4,17 @@ import Header from '../../Sections/Header';
 import Tabs from '../../Sections/Tabs';
 import Container from './styles';
 
-export default function AuthPageTemplate({ children, currentPage = 'login' }) {
+export default function AuthPageTemplate({
+  children,
+  currentPage = 'login',
+  onSubmit = () => {}
+}) {
   return (
     <Container>
       <Header />
       <Tabs currentPage={currentPage} />
 
-      <Form>
+      <Form onSubmit={onSubmit}>
         {children}
       </Form>
     </Container>
