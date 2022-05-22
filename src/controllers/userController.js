@@ -30,3 +30,7 @@ export function getLocalUser() {
 export function setLocalUser(user) {
   localStorage.setItem('authenticatedUser', JSON.stringify(user));
 }
+
+export function deleteLocalUser() {
+  localStorage.removeItem('authenticatedUser');
+}
