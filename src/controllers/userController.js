@@ -10,3 +10,13 @@ export async function createUser(name, email, password) {
     return null;
   }
 }
+
+export function getLocalUser() {
+  const localUser = JSON.parse(localStorage.getItem('authenticatedUser'));
+
+  return localUser;
+}
+
+export function setLocalUser(user) {
+  localStorage.setItem('authenticatedUser', JSON.stringify(user));
+}
