@@ -5,6 +5,7 @@ import SizedBox from '../../components/Sections/SizedBox';
 import AuthPageTemplate from '../../components/Templates/AuthPageTemplate';
 import { createUser } from '../../controllers/userController';
 import AlertPopup from '../../components/Popups/AlertPopup';
+import { useAuth } from '../../context/AuthContext';
 
 export default function SignupPage() {
   const [popupIsVisible, setPopupIsVisible] = useState(false);
@@ -12,6 +13,7 @@ export default function SignupPage() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const { setUser } = useAuth();
 
   useEffect(() => {
     const nameIsNotEmpty = name.length > 0;
@@ -26,7 +28,7 @@ export default function SignupPage() {
     const data = await createUser(name, email, password);
 
     if (data) {
-      console.log(data);
+      setUser(data);
     } else {
       setPopupIsVisible(true);
     }
