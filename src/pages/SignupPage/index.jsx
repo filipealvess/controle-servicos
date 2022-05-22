@@ -9,7 +9,7 @@ import { useAuth } from '../../context/AuthContext';
 
 export default function SignupPage() {
   const [popupIsVisible, setPopupIsVisible] = useState(false);
-  const [buttonIsVisible, setButtonIsVisible] = useState(false);
+  const [buttonIsActive, setButtonIsActive] = useState(false);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -20,7 +20,7 @@ export default function SignupPage() {
     const emailIsNotEmpty = email.length > 0;
     const passwordIsNotEmpty = password.length > 0;
 
-    setButtonIsVisible(nameIsNotEmpty && emailIsNotEmpty && passwordIsNotEmpty);
+    setButtonIsActive(nameIsNotEmpty && emailIsNotEmpty && passwordIsNotEmpty);
   }, [email, name, password]);
 
   async function handleFormSubmit(event) {
@@ -64,7 +64,7 @@ export default function SignupPage() {
 
       <SizedBox height={40} />
 
-      <PrimaryButton text="Criar Conta" disabled={!buttonIsVisible} />
+      <PrimaryButton text="Criar Conta" disabled={!buttonIsActive} />
 
       <AlertPopup
         title="Erro no cadastro"
