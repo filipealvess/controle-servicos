@@ -4,7 +4,13 @@ import IconButton from '../../Buttons/IconButton';
 import Label from '../Label';
 import Container, { Input } from './styles';
 
-export default function Field({ label, placeholder, type = 'text', tip }) {
+export default function Field({
+  label,
+  placeholder,
+  type = 'text',
+  tip,
+  required = false
+}) {
   const [icon, setIcon] = useState(<Eye size={18} />);
   const [passwordIsVisible, setPasswordIsVisible] = useState(false);
   const [inputType, setIinputType] = useState(type);
@@ -17,10 +23,6 @@ export default function Field({ label, placeholder, type = 'text', tip }) {
     }
   }, [type, passwordIsVisible]);
 
-  function handleButtonClick() {
-    setPasswordIsVisible(!passwordIsVisible);
-  }
-
   return (
     <Label text={label} tip={tip}>
       <Container isActive={isActive}>
@@ -29,14 +31,14 @@ export default function Field({ label, placeholder, type = 'text', tip }) {
           placeholder={placeholder}
           onFocus={() => setIsActive(true)}
           onBlur={() => setIsActive(false)}
+          required={required}
         />
 
-        {
-          type === 'password' &&
-          <IconButton onClick={handleButtonClick}>
+        {type === 'password' && (
+          <IconButton onClick={() => setPasswordIsVisible(!passwordIsVisible)}>
             {icon}
           </IconButton>
-        }
+        )}
       </Container>
     </Label>
   );

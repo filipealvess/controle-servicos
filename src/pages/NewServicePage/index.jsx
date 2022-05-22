@@ -16,13 +16,14 @@ export default function NewServicePage() {
       />
 
       <SizedBox maxWidth={500} auto>
-        <Field label="Nome" placeholder="Nome do serviço" />
-        <Multilines label="Descrição" placeholder="Descrição do serviço" />
+        <Field label="Nome" placeholder="Nome do serviço" required />
+        <Multilines label="Descrição" placeholder="Descrição do serviço" required />
         <Field
           label="Preço padrão"
           placeholder="R$ 0,00"
           type="number"
           tip="Poderá ser alterado para cada prestador posteriormente."
+          required
         />
         <SizedBox height={40} />
         <PrimaryButton text="Salvar" />

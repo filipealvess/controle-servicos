@@ -7,8 +7,8 @@ import AuthPageTemplate from '../../components/Templates/AuthPageTemplate';
 export default function LoginPage() {
   return (
     <AuthPageTemplate>
-      <Field label="E-mail" placeholder="Seu e-mail" type="email" />
-      <Field label="Senha" placeholder="******" type="password" />
+      <Field label="E-mail" placeholder="Seu e-mail" type="email" required />
+      <Field label="Senha" placeholder="******" type="password" required />
       <SizedBox height={40} />
       <PrimaryButton text="Entrar" />
     </AuthPageTemplate>

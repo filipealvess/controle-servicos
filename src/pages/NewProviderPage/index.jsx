@@ -18,9 +18,9 @@ export default function NewProviderPage() {
 
       <SizedBox maxWidth={500} auto>
         <AvatarImageUpload />
-        <Field label="Nome" placeholder="Nome do prestador" />
-        <Field label="Telefone" placeholder="(00) 0000-0000" type="tel" />
-        <Field label="E-mail" placeholder="E-mail do prestador" type="email" />
+        <Field label="Nome" placeholder="Nome do prestador" required />
+        <Field label="Telefone" placeholder="(00) 0000-0000" type="tel" required />
+        <Field label="E-mail" placeholder="E-mail do prestador" type="email" required />
         <ServicesList />
         <SizedBox height={40} />
         <PrimaryButton text="Salvar" />
