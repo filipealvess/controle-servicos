@@ -1,8 +1,9 @@
 import React from 'react';
 import Label from '../../Inputs/Label';
+import ServiceSelect from '../../Inputs/ServiceSelect';
 import EmptySection from '../../Sections/EmptySection';
 
-export default function ServicesList({ services = [] }) {
+export default function ServicesList({ services = [], onChange = () => {} }) {
   return (
     <>
       <Label
@@ -13,6 +14,10 @@ export default function ServicesList({ services = [] }) {
       {services.length === 0 && (
         <EmptySection description="Nenhum serviço cadastrado" />
       )}
+
+      {services.map(service => (
+        <ServiceSelect key={service.id} service={service} onChange={onChange} />
+      ))}
     </>
   );
 }

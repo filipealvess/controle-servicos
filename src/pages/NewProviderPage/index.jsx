@@ -8,6 +8,8 @@ import PrimaryButton from '../../components/Buttons/PrimaryButton';
 import ServicesList from '../../components/Sections/ServicesList';
 import SizedBox from '../../components/Sections/SizedBox';
 import { formatPhone } from '../../controllers/providerController';
+import { useAuth } from '../../context/AuthContext';
+import { listServices } from '../../controllers/serviceController';
 
 export default function NewProviderPage() {
   const [buttonIsActive, setButtonIsActive] = useState(false);
@@ -15,15 +17,32 @@ export default function NewProviderPage() {
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
   const [imageSource, setImageSource] = useState('');
+  const [services, setServices] = useState([]);
+  const { user } = useAuth();
+
+  useEffect(() => {
+    async function getServices(userID) {
+      const data = await listServices(userID);
+      const newServices = data.map(({ id, name, default_price }) => {
+        return { id, name, price: default_price, isSelected: false };
+      });
+
+      setServices(newServices);
+    }
+
+    user && getServices(user.id);
+  }, [user]);
 
   useEffect(() => {
     const nameIsNotEmpty = name.length > 0;
     const phoneIsNotEmpty = phone.length > 0;
     const emailIsNotEmpty = email.length > 0;
     const hasSelectedImage = imageSource.length > 0;
+    const hasSelectedServices = services.filter(service => service.isSelected).length > 0;
+    const fieldsAreNotEmpty = nameIsNotEmpty && phoneIsNotEmpty && emailIsNotEmpty;
 
-    setButtonIsActive(nameIsNotEmpty && phoneIsNotEmpty && emailIsNotEmpty && hasSelectedImage);
-  }, [name, phone, email, imageSource]);
+    setButtonIsActive(fieldsAreNotEmpty && hasSelectedImage && hasSelectedServices);
+  }, [name, phone, email, imageSource, services]);
 
   function handleImageSelect({ target }) {
     const image = target.files[0];
@@ -33,6 +52,14 @@ export default function NewProviderPage() {
     reader.onload = ({ target }) => {
       setImageSource(target.result);
     };
+  }
+
+  function handleServiceChange(updatedService) {
+    const updatedServices = services.map(service => {
+      return service.id === updatedService.id ? updatedService : service;
+    });
+
+    setServices(updatedServices);
   }
 
   return (
@@ -72,7 +99,7 @@ export default function NewProviderPage() {
           onChange={({ target }) => setEmail(target.value)}
         />
 
-        <ServicesList />
+        <ServicesList services={services} onChange={handleServiceChange} />
 
         <SizedBox height={40} />
 
