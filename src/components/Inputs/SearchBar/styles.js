@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const Container = styled.article`
+const Container = styled.form`
   display: flex;
   align-items: stretch;
   width: 35%;
