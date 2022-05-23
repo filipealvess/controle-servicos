@@ -14,6 +14,7 @@ export default function ProvidersPage() {
   const [providerPopupIsVisible, setProviderPopupIsVisible] = useState(false);
   const [errorPopupIsVisible, setErrorPopupIsVisible] = useState(false);
   const [infoPopupIsVisible, setInfoPopupIsVisible] = useState(false);
+  const [importPopupIsVisible, setImportPopupIsVisible] = useState(false);
   const [providers, setProviders] = useState([]);
   const [pagesNumber, setPagesNumber] = useState(null);
   const [currentPageNumber, setCurrentPageNumber] = useState(null);
@@ -22,10 +23,18 @@ export default function ProvidersPage() {
   const { user } = useAuth();
 
   useEffect(() => {
-    const state = JSON.parse(sessionStorage.getItem('one-provider-was-created'));
+    const providerWasCreated = JSON.parse(sessionStorage.getItem('one-provider-was-created'));
+    const dataImported = JSON.parse(sessionStorage.getItem('data-was-imported'));
 
-    state && setInfoPopupIsVisible(true);
-    sessionStorage.removeItem('one-provider-was-created');
+    if (providerWasCreated) {
+      setInfoPopupIsVisible(true);
+      sessionStorage.removeItem('one-provider-was-created');
+    }
+    
+    if (dataImported) {
+      setImportPopupIsVisible(true);
+      sessionStorage.removeItem('data-was-imported');
+    }
   }, []);
 
   useEffect(() => {
@@ -120,6 +129,13 @@ export default function ProvidersPage() {
         description="O prestador de serviços foi cadastrado e já está na lista"
         isVisible={infoPopupIsVisible}
         onClose={() => setInfoPopupIsVisible(false)}
+      />
+
+      <AlertPopup
+        title="Importação realizada"
+        description="Os dados foram importados e já estão na lista"
+        isVisible={importPopupIsVisible}
+        onClose={() => setImportPopupIsVisible(false)}
       />
 
       <ProviderPopup
