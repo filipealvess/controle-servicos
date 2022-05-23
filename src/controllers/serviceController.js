@@ -58,3 +58,7 @@ export async function listServices(userID) {
     return null;
   }
 }
+
+export function clearPrice(price) {
+  return price.replace(/\D/g, '');
+}
