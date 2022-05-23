@@ -29,6 +29,18 @@ export async function uploadImage(imageFile, imageName) {
   }
 }
 
+export async function listProviders(userID, page) {
+  try {
+    const { status, data } = await axios.get(`${PROVIDERS_ROUTE}/${userID}`, {
+      params: { page }
+    });
+
+    return status === 200 ? data : null;
+  } catch (error) {
+    return null;
+  }
+}
+
 export function formatPhone(originalPhone) {
   return originalPhone.replace(/\D/g, '')
     .replace(/^(\d)/, '($1')
