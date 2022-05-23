@@ -34,7 +34,7 @@ export default function NewServicePage() {
     const data = await createService(user.id, name, description, cleanPrice);
 
     if (data) {
-      sessionStorage.setItem('one-service-was-created', true);
+      sessionStorage.setItem('one-service-was-created', JSON.stringify(true));
       navigate('/servicos');
     } else {
       setPopupIsVisible(true);
