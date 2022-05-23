@@ -9,7 +9,7 @@ import ServicesList from '../../components/Sections/ServicesList';
 import SizedBox from '../../components/Sections/SizedBox';
 import { clearPhone, createProvider, formatPhone, uploadImage } from '../../controllers/providerController';
 import { useAuth } from '../../context/AuthContext';
-import { listServices, clearPrice } from '../../controllers/serviceController';
+import { listServices } from '../../controllers/serviceController';
 import { useNavigate } from 'react-router-dom';
 import AlertPopup from '../../components/Popups/AlertPopup';
 import LoadingPopup from '../../components/Popups/LoadingPopup';
@@ -78,7 +78,7 @@ export default function NewProviderPage() {
     const imageName = `${Date.now().toString()}${extension}`;
     const src = await uploadImage(imageFile, imageName);
     const providerServices = services.filter(service => service.isSelected)
-      .map(({ id, name, price }) => ({ id, name, price: clearPrice(price) }));
+      .map(({ id, name, price }) => ({ id, name, price }));
     const data = await createProvider(user.id, src, name, clearPhone(phone), email, providerServices);
 
     setLoadingIsVisible(false);
