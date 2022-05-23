@@ -7,16 +7,19 @@ import Field from '../../components/Inputs/Field';
 import PrimaryButton from '../../components/Buttons/PrimaryButton';
 import ServicesList from '../../components/Sections/ServicesList';
 import SizedBox from '../../components/Sections/SizedBox';
-import { formatPhone } from '../../controllers/providerController';
+import { formatPhone, uploadImage } from '../../controllers/providerController';
 import { useAuth } from '../../context/AuthContext';
 import { listServices } from '../../controllers/serviceController';
+import AlertPopup from '../../components/Popups/AlertPopup';
 
 export default function NewProviderPage() {
+  const [popupIsVisible, setPopupIsVisible] = useState(false);
   const [buttonIsActive, setButtonIsActive] = useState(false);
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
   const [imageSource, setImageSource] = useState('');
+  const [imageFile, setImageFile] = useState(null);
   const [services, setServices] = useState([]);
   const { user } = useAuth();
 
@@ -48,6 +51,7 @@ export default function NewProviderPage() {
     const image = target.files[0];
     const reader = new FileReader();
 
+    setImageFile(image);
     reader.readAsDataURL(image);
     reader.onload = ({ target }) => {
       setImageSource(target.result);
@@ -62,6 +66,14 @@ export default function NewProviderPage() {
     setServices(updatedServices);
   }
 
+  async function handleFormSubmit(event) {
+    event.preventDefault();
+
+    const extension = imageFile.name.match(/(.png|.jpg|.jpeg)/)[0];
+    const imageName = `${Date.now().toString()}${extension}`;
+    await uploadImage(imageFile, imageName);
+  }
+
   return (
     <DashboardTemplate currentPage="providers">
       <DashboardHeader
@@ -70,7 +82,7 @@ export default function NewProviderPage() {
         hasCancelButton
       />
 
-      <Form>
+      <Form onSubmit={handleFormSubmit}>
         <AvatarImageUpload onSelect={handleImageSelect} src={imageSource} />
 
         <Field
@@ -105,6 +117,13 @@ export default function NewProviderPage() {
 
         <PrimaryButton text="Salvar" disabled={!buttonIsActive} />
       </Form>
+
+      <AlertPopup
+        title="Erro no cadastro"
+        description="Não foi possível cadastrar o prestador de serviços, tente novamente mais tarde"
+        isVisible={popupIsVisible}
+        onClose={() => setPopupIsVisible(false)}
+      />
     </DashboardTemplate>
   );
 }
