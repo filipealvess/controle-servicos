@@ -6,11 +6,13 @@ import { listServices } from '../../controllers/serviceController';
 import { useAuth } from '../../context/AuthContext';
 import AlertPopup from '../../components/Popups/AlertPopup';
 import ServicesGrid from '../../components/Sections/ServicesGrid';
+import SearchResult from '../../components/Links/SearchResult';
 
 export default function ServicesPage() {
   const [errorPopupIsVisible, setErrorPopupIsVisible] = useState(false);
   const [infoPopupIsVisible, setInfoPopupIsVisible] = useState(false);
   const [services, setServices] = useState([]);
+  const [search, setSearch] = useState('');
   const { user } = useAuth();
 
   useEffect(() => {
@@ -24,22 +26,53 @@ export default function ServicesPage() {
     async function fetch() {
       const data = await listServices(user.id);
 
-      data ? setServices(data) : setErrorPopupIsVisible(true);
+      data
+        ? setServices(data.map(service => ({ ...service, isVisible: true })))
+        : setErrorPopupIsVisible(true);
     }
 
     fetch();
   }, [user]);
 
+  function handleSearch(searchText) {
+    setSearch(searchText);
+    setServices(services.map(service => {
+      const serviceName = service.name.toLowerCase();
+      const matchedSearch = serviceName.includes(searchText.toLowerCase());
+      const newValues = { ...service, isVisible: false };
+
+      return matchedSearch ? { ...service, isVisible: true } : newValues;
+    }));
+  }
+
+  function clearSearch() {
+    setSearch('');
+    setServices(services.map(service => ({ ...service, isVisible: true })));
+  }
+
   return (
     <DashboardTemplate currentPage="services">
-      <DashboardHeader title="Serviços" route="/servicos/novo" />
+      <DashboardHeader
+        title="Serviços"
+        route="/servicos/novo"
+        onSearch={handleSearch}
+      />
+
+      {search.length > 0 && <SearchResult onClear={clearSearch} />}
 
       <ServicesGrid services={services} />
 
-      {services.length === 0 && (
+      {services.length === 0 && search.length === 0 && (
         <EmptySection
           title="Nenhum serviço cadastrado"
           description="Para cadastrar seu primeiro serviço, clique no botão NOVO."
+        />
+      )}
+
+      {services.filter(({ isVisible }) => isVisible).length === 0 && (
+        <EmptySection
+          title="Nenhum serviço encontrado"
+          description="Não foi possível encontrar serviços com a busca realizada"
         />
       )}
 
