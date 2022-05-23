@@ -1,9 +1,12 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const Container = styled.article`
+  display: none;
   padding: 20px;
   border-radius: 8px;
   background-color: ${({ theme }) => theme.lightGrey};
+
+  ${({ isVisible }) => isVisible && css`display: block;`}
 `;
 
 export const Header = styled.header`
