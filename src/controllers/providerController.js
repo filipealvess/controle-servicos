@@ -29,10 +29,10 @@ export async function uploadImage(imageFile, imageName) {
   }
 }
 
-export async function listProviders(userID, page) {
+export async function listProviders(userID, page, search) {
   try {
     const { status, data } = await axios.get(`${PROVIDERS_ROUTE}/${userID}`, {
-      params: { page }
+      params: { page, search }
     });
 
     return status === 200 ? data : null;
