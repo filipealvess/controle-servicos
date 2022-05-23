@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Download } from 'react-feather';
 import Container, { Description, Title } from './styles';
 
-export default function ImportSection() {
+export default function ImportSection({ onUpload = () => {}}) {
   const [isActive, setIsActive] = useState(false);
 
   return (
@@ -15,7 +15,12 @@ export default function ImportSection() {
       <Title>Importe os dados de prestadores e serviços</Title>
       <Description>Selecione um arquivo CSV do seu computador</Description>
 
-      <input type="file" hidden />
+      <input
+        type="file"
+        accept=".csv"
+        onChange={onUpload}
+        hidden
+      />
     </Container>
   );
 }
