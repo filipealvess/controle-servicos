@@ -110,8 +110,8 @@ export default function ProvidersPage() {
 
       {providers.length > 0 && providers.filter(({ isVisible }) => isVisible).length === 0 && (
         <EmptySection
-          title="Nenhum serviço encontrado"
-          description="Não foi possível encontrar serviços com a busca realizada"
+          title="Nenhum prestador encontrado"
+          description="Não foi possível encontrar prestadores com a busca realizada"
         />
       )}
 
