@@ -69,7 +69,7 @@ export default function ServicesPage() {
         />
       )}
 
-      {services.filter(({ isVisible }) => isVisible).length === 0 && (
+      {services.length > 0 && services.filter(({ isVisible }) => isVisible).length === 0 && (
         <EmptySection
           title="Nenhum serviço encontrado"
           description="Não foi possível encontrar serviços com a busca realizada"

@@ -1,15 +1,19 @@
 import React from 'react';
 import { UserPlus } from 'react-feather';
-import Container, { Content } from './styles';
+import Container, { Content, Image } from './styles';
 
-export default function AvatarImageUpload() {
+export default function AvatarImageUpload({ onSelect = () => {}, src = '' }) {
   return (
     <Container>
-      <Content>
-        <UserPlus color="#FFFFFF" size={32} />
-      </Content>
+      {src.length === 0 && (
+        <Content>
+          <UserPlus color="#FFFFFF" size={32} />
+        </Content>
+      )}
 
-      <input type="file" hidden />
+      {src.length > 0 && <Image src={src} />}
+
+      <input type="file" hidden onChange={onSelect} accept=".png, .jpg, .jpeg" />
     </Container>
   );
 }
