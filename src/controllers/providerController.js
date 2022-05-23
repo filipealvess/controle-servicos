@@ -1,5 +1,19 @@
+import axios from 'axios';
+import { PROVIDERS_ROUTE } from '../api/routes';
 import storage from '../api/firebaseConfig';
 import { ref, uploadBytes } from 'firebase/storage';
+
+export async function createProvider(userID, imagePath, name, phone, email, services) {
+  try {
+    const { status, data } = await axios.post(PROVIDERS_ROUTE, {
+      userID, imagePath, name, phone, email, services
+    });
+
+    return status === 201 ? data.data : null;
+  } catch(error) {
+    return null;
+  }
+}
 
 export async function uploadImage(imageFile, imageName) {
   try {
@@ -21,4 +35,8 @@ export function formatPhone(originalPhone) {
     .replace(/\((\d)(\d)(\d)/, '($1$2) $3')
     .replace(/(\d{5})(\d)/, '$1-$2')
     .replace(/(-\d{4})\d+?/, '$1');
+}
+
+export function clearPhone(phone) {
+  return phone.replace(/\D/g, '');
 }

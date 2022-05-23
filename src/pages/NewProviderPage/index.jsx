@@ -7,12 +7,15 @@ import Field from '../../components/Inputs/Field';
 import PrimaryButton from '../../components/Buttons/PrimaryButton';
 import ServicesList from '../../components/Sections/ServicesList';
 import SizedBox from '../../components/Sections/SizedBox';
-import { formatPhone, uploadImage } from '../../controllers/providerController';
+import { clearPhone, createProvider, formatPhone, uploadImage } from '../../controllers/providerController';
 import { useAuth } from '../../context/AuthContext';
-import { listServices } from '../../controllers/serviceController';
+import { listServices, clearPrice } from '../../controllers/serviceController';
+import { useNavigate } from 'react-router-dom';
 import AlertPopup from '../../components/Popups/AlertPopup';
+import LoadingPopup from '../../components/Popups/LoadingPopup';
 
 export default function NewProviderPage() {
+  const [loadingIsVisible, setLoadingIsVisible] = useState(false);
   const [popupIsVisible, setPopupIsVisible] = useState(false);
   const [buttonIsActive, setButtonIsActive] = useState(false);
   const [name, setName] = useState('');
@@ -22,6 +25,7 @@ export default function NewProviderPage() {
   const [imageFile, setImageFile] = useState(null);
   const [services, setServices] = useState([]);
   const { user } = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function getServices(userID) {
@@ -68,10 +72,23 @@ export default function NewProviderPage() {
 
   async function handleFormSubmit(event) {
     event.preventDefault();
+    setLoadingIsVisible(true);
 
     const extension = imageFile.name.match(/(.png|.jpg|.jpeg)/)[0];
     const imageName = `${Date.now().toString()}${extension}`;
-    await uploadImage(imageFile, imageName);
+    const src = await uploadImage(imageFile, imageName);
+    const providerServices = services.filter(service => service.isSelected)
+      .map(({ id, name, price }) => ({ id, name, price: clearPrice(price) }));
+    const data = await createProvider(user.id, src, name, clearPhone(phone), email, providerServices);
+
+    setLoadingIsVisible(false);
+
+    if (data) {
+      sessionStorage.setItem('one-provider-was-created', JSON.stringify(true));
+      navigate('/prestadores');
+    } else {
+      setPopupIsVisible(true);
+    }
   }
 
   return (
@@ -124,6 +141,8 @@ export default function NewProviderPage() {
         isVisible={popupIsVisible}
         onClose={() => setPopupIsVisible(false)}
       />
+
+      <LoadingPopup isVisible={loadingIsVisible} />
     </DashboardTemplate>
   );
 }
