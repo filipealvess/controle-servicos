@@ -98,6 +98,7 @@ export const Links = styled.ul`
     width: 100%;
     padding: 1rem 1.5rem;
     background-color: ${({ theme }) => theme.primary};
+    z-index: 1;
 
     & > ${Expanded} { display: none; }
   }
