@@ -4,7 +4,7 @@ import Container, { Description, Header, Price, Title } from './styles';
 
 export default function ServiceItem({ service }) {
   return (
-    <Container>
+    <Container isVisible={service.isVisible}>
       <Header>
         <Title>{service.name}</Title>
         <Price>{formatPrice(`${service.default_price}`)}</Price>

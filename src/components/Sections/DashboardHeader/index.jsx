@@ -10,13 +10,14 @@ export default function DashboardHeader({
   title,
   route,
   hasCancelButton = false,
-  hasActions = true
+  hasActions = true,
+  onSearch = () => {}
 }) {
   const navigate = useNavigate();
 
   function Actions() {
     return <>
-      <SearchBar />
+      <SearchBar onSearch={onSearch} />
       <SizedBox width={10} />
       <NewButton onClick={() => navigate(route)} />
     </>;
