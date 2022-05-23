@@ -8,14 +8,17 @@ import { useAuth } from '../../context/AuthContext';
 import ProvidersGrid from '../../components/Sections/ProvidersGrid';
 import Pagination from '../../components/Sections/Pagination';
 import SearchResult from '../../components/Links/SearchResult';
+import ProviderPopup from '../../components/Popups/ProviderPopup';
 
 export default function ProvidersPage() {
+  const [providerPopupIsVisible, setProviderPopupIsVisible] = useState(false);
   const [errorPopupIsVisible, setErrorPopupIsVisible] = useState(false);
   const [infoPopupIsVisible, setInfoPopupIsVisible] = useState(false);
   const [providers, setProviders] = useState([]);
   const [pagesNumber, setPagesNumber] = useState(null);
   const [currentPageNumber, setCurrentPageNumber] = useState(null);
   const [search, setSearch] = useState('');
+  const [selectedProvider, setSelectedProvider] = useState({});
   const { user } = useAuth();
 
   useEffect(() => {
@@ -61,6 +64,16 @@ export default function ProvidersPage() {
     fetchProviders();
   }
 
+  function handleProviderClick(provider) {
+    setSelectedProvider(provider);
+    setProviderPopupIsVisible(true);
+  }
+
+  function handleProviderPopupClose() {
+    setProviderPopupIsVisible(false);
+    setSelectedProvider(null);
+  }
+
   return (
     <DashboardTemplate currentPage="providers">
       <DashboardHeader
@@ -93,7 +106,7 @@ export default function ProvidersPage() {
         />
       )}
 
-      <ProvidersGrid providers={providers} />
+      <ProvidersGrid providers={providers} onClick={handleProviderClick} />
 
       <AlertPopup
         title="Erro na listagem"
@@ -107,6 +120,12 @@ export default function ProvidersPage() {
         description="O prestador de serviços foi cadastrado e já está na lista"
         isVisible={infoPopupIsVisible}
         onClose={() => setInfoPopupIsVisible(false)}
+      />
+
+      <ProviderPopup
+        provider={selectedProvider}
+        isVisible={providerPopupIsVisible}
+        onClose={handleProviderPopupClose}
       />
     </DashboardTemplate>
   );
