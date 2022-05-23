@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { CREATE_SERVICE_ROUTE } from '../api/routes';
+import { SERVICES_ROUTE } from '../api/routes';
 
 export function formatPrice(originalPrice) {
   const cleanPrice = originalPrice.replace(/\D/g, '');
@@ -41,9 +41,19 @@ export function formatPrice(originalPrice) {
 
 export async function createService(userID, name, description, defaultPrice) {
   try {
-    const { status, data } = await axios.post(CREATE_SERVICE_ROUTE, { userID, name, description, defaultPrice });
+    const { status, data } = await axios.post(SERVICES_ROUTE, { userID, name, description, defaultPrice });
 
     return status === 201 ? data.data : null;
+  } catch (error) {
+    return null;
+  }
+}
+
+export async function listServices(userID) {
+  try {
+    const { status, data } = await axios.get(`${SERVICES_ROUTE}/${userID}`);
+
+    return status === 200 ? data.data : null;
   } catch (error) {
     return null;
   }
