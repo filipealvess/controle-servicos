@@ -58,11 +58,11 @@ export default function ServicesPage() {
         onSearch={handleSearch}
       />
 
-      {search.length > 0 && <SearchResult onClear={clearSearch} />}
+      {services.length > 0 && search.length > 0 && <SearchResult onClear={clearSearch} />}
 
       <ServicesGrid services={services} />
 
-      {services.length === 0 && search.length === 0 && (
+      {services.length === 0 && (
         <EmptySection
           title="Nenhum serviço cadastrado"
           description="Para cadastrar seu primeiro serviço, clique no botão NOVO."
