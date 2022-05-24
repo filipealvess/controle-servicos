@@ -60,5 +60,5 @@ export async function listServices(userID) {
 }
 
 export function clearPrice(price) {
-  return price.replace(/\D/g, '');
+  return price.toString().replace(/\D/g, '');
 }
