@@ -10,8 +10,10 @@ import { createService } from '../../controllers/serviceController';
 import { createProvider } from '../../controllers/providerController';
 import AlertPopup from '../../components/Popups/AlertPopup';
 import { useNavigate } from 'react-router-dom';
+import LoadingPopup from '../../components/Popups/LoadingPopup';
 
 export default function ImportPage() {
+  const [loadingIsVisible, setLoadingIsVisible] = useState(false);
   const [popupIsVisible, setPopupIsVisible] = useState(false);
   const { user } = useAuth();
   const navigate = useNavigate();
@@ -41,6 +43,8 @@ export default function ImportPage() {
     });
 
     if (structureIsCorrect) {
+      setLoadingIsVisible(true);
+
       const { providers, services } = results.data.reduce((finalData, result, index) => {
         if (index === 0) {
           return finalData;
@@ -85,6 +89,8 @@ export default function ImportPage() {
         isVisible={popupIsVisible}
         onClose={() => setPopupIsVisible(false)}
       />
+
+      <LoadingPopup isVisible={loadingIsVisible} />
     </DashboardTemplate>
   );
 }
